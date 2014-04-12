@@ -1,0 +1,23 @@
+{
+  "name": "hto-e-hto",
+  "version": "0.0.0",
+  "description": "Helps to finde out info about Deputates",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tmorozov/hto-e-hto.git"
+  },
+  "author": "T.Morozov",
+  "license": "None",
+  "bugs": {
+    "url": "https://github.com/tmorozov/hto-e-hto/issues"
+  },
+  "homepage": "https://github.com/tmorozov/hto-e-hto",
+  "dependencies": {
+    "logfmt": "~1.1.2",
+    "express": "~4.0.0"
+  }
+}
