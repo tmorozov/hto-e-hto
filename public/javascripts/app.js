@@ -1,4 +1,4 @@
-angular.module("hto", [])
+angular.module("hto", ['n3-charts.linechart'])
 .controller("SelectTownController", function ($scope, $window) {
   var townTree = {
     states: [
@@ -78,6 +78,42 @@ angular.module("hto", [])
     tableParties: []
   };
 
+  $scope.charts = {
+    parties: {
+      data: [],
+      options: {
+        series: [
+          {
+            y: "percent",
+            label: "The best column series ever",
+            color: "#2ca02c",
+            type: "column",
+            thickness: undefined
+          }
+        ],
+
+        axes: {
+          x: {
+            labelFunction: function(value) {
+              obj = $scope.charts.parties.data[value];
+              if(obj && obj.name) {
+                return obj.name;
+              }
+              return $scope.charts.parties.data[value];
+            }
+          },
+          y: {
+            type: "linear",
+            key: 'percent'
+          }
+        },
+        lineMode: "linear",
+        tension: 0.7,
+        tooltipMode: "default"
+      }
+    }
+  };
+
   ReportsLoader.loadReport(onReport);
 
   function getParties(data) {
@@ -97,9 +133,7 @@ angular.module("hto", [])
       }, memoInit);
     });
 
-    console.log(grouped);
-
-    var percents = _.map(grouped, function(val) {
+    var percents = _.map(grouped, function(val, i) {
       return {
         name: val.name, 
         percent: val.propusk*100/val.total
@@ -109,16 +143,23 @@ angular.module("hto", [])
     var res = _.sortBy(percents, function(val) {
       return val.percent;
     })
-    res.unshift({name: "Партія", percent: "Процент пропусків"});
 
-    console.log(res);
+    res = _.map(res, function(val, i) {
+      val.x = i;
+      return val;
+    });
+
+    res.unshift({name: "Партія", percent: "Процент пропусків", x: "N"});
+
     return res;
   }
 
   function onReport(data) {
     $scope.data.tableAll = data;
     $scope.data.tableParties = getParties(data);
+    $scope.charts.parties.data = $scope.data.tableParties.slice(1);
   }
+
 })
 .service("ReportsLoader", function($http) {
   function loadReport(cb) {
