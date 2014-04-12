@@ -51,7 +51,7 @@
         </div>
 
         <div ng-if="activePan === 1 " class="panel panel-default">
-          <div class="panel-heading">Пропуски сессій</div>
+          <div class="panel-heading">Відвідування сессій депутатами</div>
           <div class="panel-body">
             <table class="table">
               <tr ng-repeat="row in data.tableAll">
@@ -64,7 +64,7 @@
         </div>
 
         <div ng-if="activePan === 2" class="panel panel-default">
-          <div class="panel-heading">Відвідування сессій паріями</div>
+          <div class="panel-heading">Пропуск сессій партіямі</div>
           <div class="panel-body">
             <div style="height: 400px">
               <linechart data="charts.parties.data" options="charts.parties.options" mode=""></linechart>
