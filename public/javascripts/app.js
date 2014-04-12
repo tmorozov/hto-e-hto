@@ -85,8 +85,8 @@ angular.module("hto", ['n3-charts.linechart'])
         series: [
           {
             y: "percent",
-            label: "The best column series ever",
-            color: "#2ca02c",
+            label: "Пропуски сессій по партіях",
+            color: "#aa0000",
             type: "column",
             thickness: undefined
           }
