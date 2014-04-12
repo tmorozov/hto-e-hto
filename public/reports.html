@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="hto">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="images/ico/favicon.ico">
 
-    <title>Хто є хто серед депутатів</title>
+    <title>Звіти :: Хто є хто серед депутатів</title>
 
     <!-- Bootstrap core CSS -->
     <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -32,41 +32,15 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Головна</a></li>
+          <li class="active"><a href="index.html">Головна</a></li>
           <li><a href="#">Про проект</a></li>
           <li><a href="#">Контакти</a></li>
         </ul>
         <h3 class="text-muted">Хто є хто серед депутатів</h3>
       </div>
 
-      <div class="jumbotron">
-        <h1>Хто є хто</h1>
-        <p class="lead">Взнай як працюють обрані тобою депутати.</p>
-        <p><a class="btn btn-lg btn-success" href="select_report.html" role="button">Переглянути</a></p>
-      </div>
 
       <div class="row marketing">
-        <div class="col-lg-6">
-          <h4>Відвідування сессій</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-          <h4>Робота у виконкомах</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-<!-- 
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p> -->
-        </div>
-
-        <div class="col-lg-6">
-          <h4>Робота в комісіях</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-          <h4>Подані запити</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-<!--          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p> -->
-        </div>
       </div>
 
       <div class="footer">
@@ -79,5 +53,8 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.5/angular.min.js"></script>
+    <script src="javascripts/app.js"></script>
+
   </body>
 </html>
