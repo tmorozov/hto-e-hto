@@ -41,7 +41,7 @@
 
       <div class="row" ng-controller="ReportTableController">
 
-        <ul class="nav nav-tabs" ng-init="activePan = 1">
+        <ul class="nav nav-tabs" ng-init="activePan = 3">
           <li ng-class="activePan === 1 ? 'active' : ''"><a href="" ng-click="activePan = 1">Депутати</a></li>
           <li ng-class="activePan === 2 ? 'active' : ''"><a href="" ng-click="activePan = 2">Партії</a></li>
           <li ng-class="activePan === 3 ? 'active' : ''"><a href="" ng-click="activePan = 3">Всі дані</a></li>
@@ -53,27 +53,47 @@
         <div ng-if="activePan === 1 " class="panel panel-default">
           <div class="panel-heading">Відвідування сессій депутатами</div>
           <div class="panel-body">
+            <div>
+              <highchart config="charts.deputates" class="col-md-12" style="height: 800px;"></highchart>
+            </div>
             <table class="table">
-              <tr ng-repeat="row in data.tableAll">
-                <td>{{row[0]}}</td>
-                <td>{{row[10]}}</td>
-                <td>{{row[6]}}</td>
-              </tr>
+              <thead>
+                <tr>
+                  <td>{{data.tableAll.header[0]}}</td>
+                  <td>{{data.tableAll.header[10]}}</td>
+                  <td>{{data.tableAll.header[6]}}</td>                  
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="row in data.tableAll.body">
+                  <td>{{row[0]}}</td>
+                  <td>{{row[10]}}</td>
+                  <td>{{row[6]}}</td>
+                </tr>
+              </tbody>
+
             </table>
           </div>
         </div>
 
         <div ng-if="activePan === 2" class="panel panel-default">
-          <div class="panel-heading">Пропуск сессій партіямі</div>
+          <div class="panel-heading">Партії на сессіях</div>
           <div class="panel-body">
-            <div style="height: 400px">
-              <linechart data="charts.parties.data" options="charts.parties.options" mode=""></linechart>
+            <div>
+              <highchart config="charts.parties" class="col-md-12"></highchart>
             </div>
 
             <table class="table">
-              <tr ng-repeat="row in data.tableParties">
-                <td ng-repeat="value in row track by $index">{{value}}</td>
-              </tr>
+              <thead>
+                <tr>
+                  <td ng-repeat="value in data.tableParties.header">{{value}}</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="row in data.tableParties.body">
+                  <td ng-repeat="value in row track by $index">{{value}}</td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>
@@ -82,9 +102,16 @@
           <div class="panel-heading">Відвідування сессій</div>
           <div class="panel-body">
             <table class="table table-condensed" style="font-size: 10px;">
-              <tr ng-repeat="row in data.tableAll">
-                <td ng-repeat="value in row track by $index">{{value}}</td>
-              </tr>
+              <thead>
+                <tr>
+                  <td ng-repeat="value in data.tableAll.header">{{value}}</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="row in data.tableAll.body">
+                  <td ng-repeat="value in row track by $index">{{value}}</td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>
@@ -104,13 +131,16 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.5/angular.min.js"></script>
-    
-    <script src="javascripts/3party/d3.v3.min.js"></script>
-    <script src="javascripts/3party/line-chart.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.5/angular.min.js"></script>    
+
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="javascripts/3party/highcharts-ng.js"></script>
 
     <script src="javascripts/app.js"></script>
+    <script src="javascripts/services.js"></script>
+    <script src="javascripts/controllers.js"></script>
 
   </body>
 </html>
