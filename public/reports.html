@@ -40,11 +40,51 @@
 
 
       <div class="row" ng-controller="ReportTableController">
-        <table class="table">
-          <tr ng-repeat="row in table.rows">
-            <td ng-repeat="value in row track by $index">{{value}}</td>
-          </tr>
-        </table>
+
+        <ul class="nav nav-tabs" ng-init="activePan = 1">
+          <li ng-class="activePan === 1 ? 'active' : ''"><a href="" ng-click="activePan = 1">Депутати</a></li>
+          <li ng-class="activePan === 2 ? 'active' : ''"><a href="" ng-click="activePan = 2">Партії</a></li>
+          <li ng-class="activePan === 3 ? 'active' : ''"><a href="" ng-click="activePan = 3">Всі дані</a></li>
+        </ul>
+
+        <div class="row marketing">
+        </div>
+
+        <div ng-if="activePan === 1 " class="panel panel-default">
+          <div class="panel-heading">Відвідування сессій депутатами</div>
+          <div class="panel-body">
+            <table class="table">
+              <tr ng-repeat="row in data.tableAll">
+                <td>{{row[0]}}</td>
+                <td>{{row[10]}}</td>
+                <td>{{row[6]}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div ng-if="activePan === 2" class="panel panel-default">
+          <div class="panel-heading">Відвідування сессій паріями</div>
+          <div class="panel-body">
+            <table class="table">
+              <tr ng-repeat="row in data.tableParties">
+                <td ng-repeat="value in row track by $index">{{value}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div ng-if="activePan === 3 " class="panel panel-default">
+          <div class="panel-heading">Відвідування сессій</div>
+          <div class="panel-body">
+            <table class="table table-condensed" style="font-size: 10px;">
+              <tr ng-repeat="row in data.tableAll">
+                <td ng-repeat="value in row track by $index">{{value}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
       </div>
 
       <div class="row marketing">
@@ -60,6 +100,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.5/angular.min.js"></script>
     <script src="javascripts/app.js"></script>
 

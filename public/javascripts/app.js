@@ -73,16 +73,51 @@ angular.module("hto", [])
 
 })
 .controller("ReportTableController", function($scope, ReportsLoader) {
-  $scope.table = {
-    header: [],
-    rows: []
+  $scope.data = {
+    tableAll: [],
+    tableParties: []
   };
 
   ReportsLoader.loadReport(onReport);
 
+  function getParties(data) {
+    var rows = data.slice(1);
+    var byParty = _.groupBy(rows, function(row) {
+      return row[10];
+    });
+
+    var grouped =  _.map(byParty, function(party) {
+      var memoInit = {name:'', propusk: 0, total: 0};
+      return _.reduce(party, function(memo, dep) {
+        memo.name = dep[10];
+        memo.propusk += (+dep[1]) + (+dep[2]);
+        memo.total += +dep[9];
+
+        return memo;
+      }, memoInit);
+    });
+
+    console.log(grouped);
+
+    var percents = _.map(grouped, function(val) {
+      return {
+        name: val.name, 
+        percent: val.propusk*100/val.total
+      };
+    });
+
+    var res = _.sortBy(percents, function(val) {
+      return val.percent;
+    })
+    res.unshift({name: "Партія", percent: "Процент пропусків"});
+
+    console.log(res);
+    return res;
+  }
+
   function onReport(data) {
-    console.log(data);
-    $scope.table.rows = data;
+    $scope.data.tableAll = data;
+    $scope.data.tableParties = getParties(data);
   }
 })
 .service("ReportsLoader", function($http) {
